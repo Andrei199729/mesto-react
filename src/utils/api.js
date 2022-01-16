@@ -2,8 +2,11 @@ class Api {
     constructor({ address, token }) {
         this.address = address;
         this.token = token;
-        this._getResponseData = (res => res.ok ? res.json() : Promise.reject(new Error(`Ошибка: ${res.status}`)));
     }
+
+    _getResponseData(res) {
+        return res.ok ? res.json() : Promise.reject(new Error(`Ошибка: ${res.status}`));
+    } 
 
     getInitialCards() {
         return fetch(`${this.address}/cards`, {

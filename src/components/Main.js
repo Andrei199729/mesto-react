@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Card from "./Card";
 import api from "../utils/api";
@@ -9,22 +9,16 @@ function Main(props) {
     const [userAvatar, setUserAvatar] = useState('');
     const [cards, setCards] = useState([]);
 
-    Promise.all([api.getAboutUser(), api.getInitialCards()])
-        .then(([user, card]) => {
-            setUserName(user.name);
-            setUserDescription(user.about);
-            setUserAvatar(user.avatar);
-            const filterCards = card.map(item => {
-                return {
-                    _id: item._id,
-                    link: item.link,
-                    name: item.name,
-                    likes: item.likes
-                }
-            });
-            setCards(filterCards)
-        })
-        .catch(err => console.log(err))
+    useEffect(() => {
+        Promise.all([api.getAboutUser(), api.getInitialCards()])
+            .then(([user, card]) => {
+                setUserName(user.name);
+                setUserDescription(user.about);
+                setUserAvatar(user.avatar);
+                setCards(card);
+            })
+            .catch(err => console.log(err))
+    }, []);
 
     return (
         <>
