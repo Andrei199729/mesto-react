@@ -67,9 +67,10 @@ class Api {
             .then(this._getResponseData)
     }
 
-    addlike(dataId) {
+    changeLikeCardStatus(dataId, isLiked) {
+        const method = isLiked ? 'DELETE' : 'PUT';
         return fetch(`${this.address}/cards/${dataId}/likes`, {
-            method: 'PUT',
+            method,
             headers: {
                 'authorization': this.token,
                 'Content-Type': 'application/json'
@@ -78,16 +79,6 @@ class Api {
             .then(this._getResponseData)
     }
 
-    removeLike(dataId) {
-        return fetch(`${this.address}/cards/${dataId}/likes`, {
-            method: 'DELETE',
-            headers: {
-                'authorization': this.token,
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(this._getResponseData)
-    }
     updateAvatar(data) {
         return fetch(`${this.address}/users/me/avatar`, {
             method: 'PATCH',
@@ -96,7 +87,7 @@ class Api {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                avatar: data.link
+                avatar: data.avatar
             })
         })
             .then(this._getResponseData)
