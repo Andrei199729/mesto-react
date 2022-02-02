@@ -10,7 +10,7 @@ function EditProfilePopup(props) {
     useEffect(() => {
         setName(currentUser.name);
         setDescription(currentUser.about);
-    }, [currentUser]);
+    }, [currentUser, props.isOpen]);
 
     function handleSubmit(e) {
         // Запрещаем браузеру переходить по адресу формы
@@ -30,7 +30,7 @@ function EditProfilePopup(props) {
             isOpen={props.isOpen}
             onClose={props.onClose}
             btnText='Сохранить'
-            onSubmitForm={(handleSubmit)}
+            onSubmitForm={handleSubmit}
         >
             <div className="form__column">
                 <input

@@ -62,19 +62,19 @@ function App() {
 
   function handleUpdateUser(user) {
     api.editProfile(user)
-      .then(user => setCurrentUser(user))
+      .then(user => setCurrentUser(user), closeAllPopups())
       .catch(err => console.log(err))
   }
 
   function handleUpdateAvatar(avatar) {
     api.updateAvatar(avatar)
-      .then(item => setCurrentUser(item))
+      .then(item => setCurrentUser(item), closeAllPopups())
       .catch(err => console.log(err))
   }
 
   function handleAddPlaceSubmit(newCard) {
     api.addCard(newCard)
-      .then(card => setCards([card, ...cards]))
+      .then(card => setCards([card, ...cards]), closeAllPopups())
       .catch(err => console.log(err))
   }
 

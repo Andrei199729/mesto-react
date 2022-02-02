@@ -1,10 +1,9 @@
-import React, { createRef } from "react";
+import React, { useRef } from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup(props) {
-
-    const refInputName = createRef();
-    const refInputLink = createRef();
+    const refInputName = useRef(null);
+    const refInputLink = useRef(null);
 
     function handleSubmit(e) {
 
